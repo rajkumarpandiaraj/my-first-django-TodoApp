@@ -29,3 +29,11 @@ def update(request, pk):
     return render(request, 'update.html', {'form' : form})
 
 
+
+def delete_task(request, pk):
+    task = models.Task.objects.get(id=pk)
+    if request.method == 'POST':
+        task.delete()
+        return redirect('/')
+
+    return render(request, 'delete.html', {"task" : task})
